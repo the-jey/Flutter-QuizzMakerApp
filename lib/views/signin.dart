@@ -85,18 +85,7 @@ class _SignInState extends State<SignIn> {
                       onTap: () {
                         signIn();
                       },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(30.0)),
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        child: Text(
-                          'Sign In!',
-                          style: TextStyle(color: Colors.white, fontSize: 16.0),
-                        ),
-                      ),
+                      child: blueButton(context, 'Sign In!'),
                     ),
                     SizedBox(height: 18.0),
                     Row(
@@ -122,7 +111,7 @@ class _SignInState extends State<SignIn> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 88.0)
+                    SizedBox(height: 60.0)
                   ],
                 ),
               ),
