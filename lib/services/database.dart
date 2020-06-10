@@ -21,4 +21,12 @@ class DatabaseService {
   Future getQuizzData() async {
     return Firestore.instance.collection('Quizz').snapshots();
   }
+
+  Future getQuestionData(String quizzId) async {
+    return await Firestore.instance
+        .collection('Quizz')
+        .document(quizzId)
+        .collection('QNA')
+        .getDocuments();
+  }
 }

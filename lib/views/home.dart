@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizzmaker/services/database.dart';
 import 'package:quizzmaker/views/create_quiz.dart';
+import 'package:quizzmaker/views/play_quizz.dart';
 import 'package:quizzmaker/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -28,6 +29,7 @@ class _HomeState extends State<Home> {
                       title: snapshot.data.documents[index].data['quizzTitle'],
                       description:
                           snapshot.data.documents[index].data['quizzDesc'],
+                      quizzId: snapshot.data.documents[index].data['quizzId'],
                     );
                   },
                 );
@@ -69,52 +71,60 @@ class QuizzTile extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
+  final String quizzId;
 
   QuizzTile(
       {@required this.imageUrl,
       @required this.title,
-      @required this.description});
+      @required this.description,
+      @required this.quizzId});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 8.0),
-      height: 150.0,
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              imageUrl,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.black26,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PlayQuizz(quizzId)));
+      },
+      child: Container(
+        margin: EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 8.0),
+        height: 150.0,
+        child: Stack(
+          children: [
+            ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                imageUrl,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 6.0),
-                Text(
-                  description,
-                  style: TextStyle(color: Colors.white, fontSize: 14.0),
-                ),
-              ],
+            Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: 6.0),
+                  Text(
+                    description,
+                    style: TextStyle(color: Colors.white, fontSize: 14.0),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
