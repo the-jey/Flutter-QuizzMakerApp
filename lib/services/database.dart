@@ -17,4 +17,8 @@ class DatabaseService {
         .add(questionData)
         .catchError((e) => print(e.toString()));
   }
+
+  Future getQuizzData() async {
+    return Firestore.instance.collection('Quizz').snapshots();
+  }
 }
