@@ -100,7 +100,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                     Spacer(),
                     GestureDetector(
                       onTap: () => createQuizzOnline(),
-                      child: blueButton(context, 'Create Quizz!'),
+                      child:
+                          blueButton(context: context, label: 'Create Quizz!'),
                     ),
                     SizedBox(height: 60),
                   ],
